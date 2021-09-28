@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  coffee-frontend:
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - coffee_frontend_network
