@@ -6,4 +6,34 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - coffee_frontend_network
+      - coffee_laravel 
+    links:
+      - coffee-backend    
+    depends_on:
+    	- mysql
+      - php
+  coffee-frontend-php:
+   - cosas
+    	  
+  mysql:
+  	image: mariadb:10.5
+  	ports:
+  		- 3306:3306
+  	environment:
+  		MYSQL_DATABASE: laravel
+  		MYSQL_USER: laravel
+  		MYSQL_PASSWORD: secret
+  		MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - coffee_network      
+  	volumes:
+  		- mysql:/var/lib/mysql #named volume inside docker
+  
+  coffee-backend:
+    image: nginx
+    networks:
+      - coffee_network
+      - coffee_laravel      
+
+  coffee-backend-php:      
+  - cosas
