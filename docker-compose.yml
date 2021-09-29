@@ -12,8 +12,8 @@ services:
     links:
       - coffee-backend    
     depends_on:
-    	- mysql
-      - php
+        - mysql
+        - php
   laravel-frontend:
     build:
       context: .
@@ -41,6 +41,6 @@ services:
   		MYSQL_PASSWORD: secret
   		MYSQL_ROOT_PASSWORD: secret
   	networks:
-      - coffee_network
+        - coffee_network
   	volumes:
-  		- mysql:/var/lib/mysql #named volume inside docker
+        - mysql:/var/lib/mysql #named volume inside docker
