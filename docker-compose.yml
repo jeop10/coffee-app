@@ -32,8 +32,7 @@ services:
       context: .
       dockerfile: laravel-php.dockerfile
 
-# - Database
-
+# - Database 
   coffee-database:
   	image: mariadb:10.5
   	environment:
