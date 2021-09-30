@@ -23,9 +23,6 @@ services:
 
   coffee-backend:
     image: nginx:1.21.3-alpine
-    ports:
-      - "80:80"
-      - "443:443"
     networks:
       - coffee_laravel
       - coffee_network #allow direct connect to DB
