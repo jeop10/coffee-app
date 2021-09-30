@@ -1,5 +1,6 @@
 version: "3.9"
 services:
+
 # - Frontend
 
   coffee-frontend:
@@ -44,3 +45,7 @@ services:
         - coffee_network
   	volumes:
         - mysql:/var/lib/mysql #named volume inside docker
+
+networks:
+  coffee_laravel:
+  coffee_network:
