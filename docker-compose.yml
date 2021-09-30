@@ -24,7 +24,9 @@ services:
     build:
       context: .
       dockerfile: laravel-php.dockerfile
-
+    networks:
+      - coffee_laravel
+      
 # - Backend
 
   coffee-backend:
@@ -49,7 +51,6 @@ services:
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
     networks:
-      - coffee_laravel
       - coffee_network #allow direct connect to DB
     volumes:
       - mysql:/var/lib/mysql
