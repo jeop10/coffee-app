@@ -7,7 +7,7 @@ ENV NGINX_GROUP=laravel
 
 RUN mkdir -p /var/www/html/public
 
-ADD nginx/${NGINX_GROUP} /etc/nginx/conf.d/default.conf
+ADD ${CONFIG_FILE} /etc/nginx/conf.d/default.conf
 
 RUN sed -i "s/user www-data/user ${NGNIX_USER}/g" /etc/nginx/nginx.conf
 
