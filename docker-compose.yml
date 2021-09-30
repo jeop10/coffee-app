@@ -4,7 +4,11 @@ services:
 # - Frontend
 
   coffee-frontend:
-    image: nginx:1.21.3-alpine
+    build:
+      context: .
+      dockerfile: coffee-frontend.dockerfile
+      args:
+        CONFIG_FILE: frontend.conf 
     ports:
       - "80:80"
       - "443:443"
