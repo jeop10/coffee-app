@@ -12,13 +12,15 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - ./frontend-code:/var/www/html/public
     networks:
       - coffee_laravel
     links:
       - coffee-backend
     depends_on:
       - coffee-database
-      - laravel-frontend
+      - laravel-frontend  
 
   laravel-frontend:
     build:
@@ -26,7 +28,7 @@ services:
       dockerfile: laravel-php.dockerfile
     networks:
       - coffee_laravel
-      
+
 # - Backend
 
   coffee-backend:
