@@ -1,6 +1,6 @@
-version: "3.9"
-services:
+version "3.9"
 
+services:
 # - Frontend
 
   coffee-frontend:
@@ -9,42 +9,49 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - coffee_laravel 
+      - coffee_laravel
     links:
-      - coffee-backend    
+      - coffee-backend
     depends_on:
-        - mysql
-        - php
+      - coffee-database
+      - laravel-frontend
+
   laravel-frontend:
-    build:
-      context: .
-      dockerfile: laravel-php.dockerfile
+    image: php:8-fpm-alpine
 
 # - Backend
 
   coffee-backend:
     image: nginx:1.21.3-alpine
+    ports:
+      - "80:80"
+      - "443:443"
     networks:
-      - coffee_network
-      - coffee_laravel      
+      - coffee_laravel
+      - coffee_network #allow direct connect to DB
+    depends_on:
+      - coffee-database
+      - laravel-backend
 
   laravel-backend:
-    build:
-      context: .
-      dockerfile: laravel-php.dockerfile
+    image: php:8-fpm-alpine
 
-# - Database 
+# - DATABASE
+
   coffee-database:
-  	image: mariadb:10.5
-  	environment:
-  		MYSQL_DATABASE: laravel
-  		MYSQL_USER: laravel
-  		MYSQL_PASSWORD: secret
-  		MYSQL_ROOT_PASSWORD: secret
-  	networks:
-        - coffee_network
-  	volumes:
-        - mysql:/var/lib/mysql #named volume inside docker
+    image: mariadb:10.5
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - coffee_laravel
+      - coffee_network #allow direct connect to DB
+    volumes:
+      - mysql:/var/lib/mysql
+
+# - Networks
 
 networks:
   coffee_laravel:
