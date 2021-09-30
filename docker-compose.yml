@@ -58,4 +58,4 @@ networks:
 
 # - Volumes
 volumes:
-mysql:
+  mysql:
