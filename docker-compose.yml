@@ -1,4 +1,4 @@
-version: "3.9"
+version "3.9"
 
 services:
 # - Frontend
@@ -17,12 +17,17 @@ services:
       - laravel-frontend
 
   laravel-frontend:
-    image: php:8-fpm-alpine
+    build:
+      context: .
+      dockerfile: laravel-php.dockerfile
 
 # - Backend
 
   coffee-backend:
     image: nginx:1.21.3-alpine
+    ports:
+      - "80:80"
+      - "443:443"
     networks:
       - coffee_laravel
       - coffee_network #allow direct connect to DB
@@ -53,8 +58,3 @@ services:
 networks:
   coffee_laravel:
   coffee_network:
-
-# - Volumes
-
-volumes:
-  mysql:
