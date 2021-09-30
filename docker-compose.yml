@@ -56,3 +56,8 @@ services:
 networks:
   coffee_laravel:
   coffee_network:
+
+# - Volumes
+
+volumes:
+  mysql:
