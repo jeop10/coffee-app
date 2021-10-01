@@ -59,6 +59,15 @@ services:
     volumes:
       - mysql:/var/lib/mysql
 
+
+# - Composer builder
+  composer-front:
+    image: composer/composer
+    volumes:
+      - "./coffee-frontend:/composer"
+    working_dir: /composer
+    command: install
+
 # - Networks
 
 networks:
