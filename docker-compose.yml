@@ -26,6 +26,8 @@ services:
     build:
       context: .
       dockerfile: laravel-php.dockerfile
+    volumes:
+      - ./frontend-code:/var/www/html/public
     networks:
       - coffee_laravel
 
