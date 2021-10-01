@@ -13,7 +13,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./frontend-code:/var/www/html/public
+      - ./coffee-frontend/public:/var/www/html/public
     networks:
       - coffee_laravel
     links:
@@ -27,7 +27,7 @@ services:
       context: .
       dockerfile: laravel-php.dockerfile
     volumes:
-      - ./frontend-code:/var/www/html/public
+      - ./coffee-frontend/public:/var/www/html/public
     networks:
       - coffee_laravel
 
