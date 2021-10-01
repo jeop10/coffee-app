@@ -12,11 +12,9 @@ RUN mkdir -p /var/www/html/public
 
 RUN docker-php-ext-install pdo pdo_mysql
 
-CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
-
-WORKDIR /var/www/html
-
 RUN curl -sS https://getcomposer.org/installer | php \
   && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
 
-CMD ["composer", "install"]
+RUN cd /var/www/html && composer install
+
+CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
