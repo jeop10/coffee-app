@@ -72,8 +72,8 @@ services:
   certbot:
     image: certbot/certbot
     volumes:
-      - cerbot-etc:/etc/cerbot/letsencrypt
-      - cerbot-var:/var/libt/letsencrypt
+      - certbot-etc:/etc/cerbot/letsencrypt
+      - certbot-var:/var/libt/letsencrypt
       - ./coffee-frontend:/var/www/html/
     depends_on:
       - coffee-frontend
