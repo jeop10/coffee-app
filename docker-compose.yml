@@ -75,7 +75,8 @@ services:
       - cerbot-etc:/etc/cerbot/letsencrypt
       - cerbot-var:/var/libt/letsencrypt
       - ./coffee-frontend:/var/www/html/
-    depends_on: coffee-frontend
+    depends_on:
+      - coffee-frontend
     command: certonly --webroot --webroot-path=/var/www/html/public --email email --agree-tos --no-eff-email --staging -d domain -d www.domain.com
 
 # - Networks
