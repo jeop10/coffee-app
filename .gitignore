@@ -3,6 +3,7 @@ coffee-frontend/
 
 coffee-backend/
 
+.idea/
 # Laravel template 
 
 /vendor/
