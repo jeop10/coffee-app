@@ -25,3 +25,20 @@ And for the backend
 Those commands will create the necessary .env file and generate the key that laravel needs to work.
 
 After that, you should be able to navigate to the app on port 80.
+
+---
+
+### Some problems
+
+In order to run the laravel database migrations you will need to enter the container and execute the necessary commands.
+
+Here is an example 
+
+```shell
+
+#Accessing a container
+docker exec -it coffee-app_laravel-backend_1 /bin/sh
+
+#Once inside the container running the migrations
+php artisan migrate:fresh
+```
