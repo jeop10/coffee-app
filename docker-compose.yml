@@ -34,16 +34,31 @@ services:
 # - Backend
 
   coffee-backend:
-    image: nginx:1.21.3-alpine
+    build:
+      context: .
+      dockerfile: coffee-frontend.dockerfile
+      args:
+        CONFIG_FILE: nginx/backend.conf
     networks:
       - coffee_laravel
       - coffee_network #allow direct connect to DB
+    volumes:
+      - ./coffee-backend:/var/www/html/
     depends_on:
       - coffee-database
       - laravel-backend
 
   laravel-backend:
-    image: php:8-fpm-alpine
+    build:
+      context: .
+      dockerfile: laravel-php.dockerfile
+    volumes:
+      - ./coffee-backend:/var/www/html/
+    networks:
+      - coffee_laravel
+      - coffee_network #allow direct connect to DB
+    depends_on:
+      - coffee-database
 
 # - DATABASE
 
@@ -60,13 +75,25 @@ services:
       - mysql:/var/lib/mysql
 
 
-# - Composer builder
+# - Composer frontend builder
   composer-front:
     image: composer/composer
     volumes:
       - "./coffee-frontend:/composer"
     working_dir: /composer
     command: install
+    depends_on:
+      - laravel-frontend
+
+  # - Composer backend builder
+  composer-back:
+    image: composer/composer
+    volumes:
+      - "./coffee-backend:/composer"
+    working_dir: /composer
+    command: install
+    depends_on:
+      - laravel-backend
 
 # - Networks
 
@@ -77,5 +104,3 @@ networks:
 # - Volumes
 volumes:
   mysql:
-  # certbot-etc:
-  # certbot-var:
