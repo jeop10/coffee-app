@@ -4,6 +4,7 @@ services:
 # - Frontend
 
   coffee-frontend:
+    container_name: "coffee-frontend"
     build:
       context: .
       dockerfile: coffee-frontend.dockerfile
@@ -23,6 +24,7 @@ services:
       - laravel-frontend  
 
   laravel-frontend:
+    container_name: "laravel-frontend"
     build:
       context: .
       dockerfile: laravel-php.dockerfile
@@ -34,6 +36,7 @@ services:
 # - Backend
 
   coffee-backend:
+    container_name: "coffee-backend"
     build:
       context: .
       dockerfile: coffee-frontend.dockerfile
@@ -49,6 +52,7 @@ services:
       - laravel-backend
 
   laravel-backend:
+    container_name: "laravel-backend"
     build:
       context: .
       dockerfile: laravel-php.dockerfile
@@ -63,6 +67,7 @@ services:
 # - DATABASE
 
   coffee-database:
+    container_name: "coffee-database"
     image: mariadb:10.5
     environment:
       MYSQL_DATABASE: laravel
